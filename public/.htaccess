@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Allow PATH_INFO (for api.php/api/... pattern)
+AcceptPathInfo On
+
+# If request is api.php/anything → rewrite to api.php (strip path, Router reads REQUEST_URI)
+RewriteCond %{REQUEST_URI} ^/api\.php/
+RewriteRule ^api\.php/(.*)$ api.php [QSA,L]
+
+# Route all /api/* requests to api.php  
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^api/(.*)$ api.php [QSA,L]
