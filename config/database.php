@@ -7,6 +7,8 @@
 // Parse DATABASE_URL if available (Render format)
 $databaseUrl = getenv('DATABASE_URL');
 if ($databaseUrl) {
+    // Trim any whitespace/newline characters that may be added by env var editors
+    $databaseUrl = trim($databaseUrl);
     $parsed = parse_url($databaseUrl);
     $host = $parsed['host'] ?? 'localhost';
     $port = $parsed['port'] ?? '5432';
